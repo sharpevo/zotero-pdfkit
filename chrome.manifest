@@ -1,0 +1,5 @@
+content	zotero-pdfkit				content/
+locale	zotero-pdfkit	en-US		locale/en-US/
+skin	zotero-pdfkit	default		skin/
+
+overlay	chrome://zotero/content/zoteroPane.xul	chrome://zotero-pdfkit/content/zotero-pdfkit.xul
