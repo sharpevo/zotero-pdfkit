@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://zotero-pdfkit/skin/overlay.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://zotero-pdfkit/locale/zotero-pdfkit.dtd">
+
+<overlay id="zotero-pdfkit-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script>
+        var globals = Function('return this')();
+        var zotero_pdfkit_zoteropane = null;
+    </script>
+    <stringbundleset>
+        <stringbundle id="zotero-pdfkit-strings" src="chrome://zotero-pdfkit/locale/zotero-pdfkit.properties"/>
+    </stringbundleset>
+
+    <script src="chrome://zotero-pdfkit/content/zotero-pdfkit.js"/>
+    <script>
+        window.addEventListener('load', async function () {
+            try {
+                Zotero.debug('zotero-pdfkit startup');
+                await Zotero.PdfKit.load(globals);
+                Zotero.debug('zotero-pdfkit started');
+            } catch (err) {
+                Zotero.debug(
+                    `zotero-pdfkit ZoteroPane overlay error: ${err.message}\n${
+                        err.stack || ''
+                    }`
+                );
+            }
+        });
+    </script>
+    <menupopup id="zotero-itemmenu">
+        <menuitem class="menu-iconic" id="zotero-itemmenu-pdfkit-menu-setdefault" label="Set as Default" oncommand="Zotero.Pdfkit.setDefaultPdf()"/>
+        <menuitem class="menu-iconic" id="zotero-itemmenu-pdfkit-menu-copyuri" label="Copy URI" oncommand="Zotero.Pdfkit.copyURI()"/>
+    </menupopup>
+</overlay>
